@@ -1,0 +1,87 @@
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+  <mat-toolbar color="primary">
+    <button mat-icon-button (click)="snav.toggle()" aria-label="toggle-snav">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>My App</span>
+    <span class="example-spacer"></span>
+    <span>{{currentUser.username}}</span>
+    <button mat-button [matMenuTriggerFor]="menu" aria-label="user icon">
+      <img src="http://localhost:3000/{{currentUser.image_path}}" width="36px" height="36px"
+        alt="Not Allowed to Load Local Resource">
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="logout()">
+        <mat-icon color="warn">highlight_off</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="example-sidenav-container">
+    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56" opened>
+      <mat-action-list>
+        <button mat-list-item (click)="selectComponent('dashboard')">
+          <mat-icon class="example-icon">dashboard</mat-icon>
+          <span>Dashboard</span>
+        </button>
+        <button mat-list-item (click)="selectComponent('users')">
+          <mat-icon class="example-icon">supervised_user_circle</mat-icon>
+          <span>Users</span>
+        </button>
+        <button mat-list-item (click)="selectComponent('industries')">
+          <mat-icon class="example-icon">business_center</mat-icon>
+          <span>Industries</span>
+        </button>
+        <!-- <button mat-list-item (click)="selectComponent('tasks')" [class.selected]="selectedComponent === 'tasks'">
+          <mat-icon class="example-icon">done_all</mat-icon>
+          <span>Tasks</span>
+        </button> -->
+        <!-- <button mat-list-item (click)="selectComponent('tree')" [class.selected]="selectedComponent === 'tree'">
+          <mat-icon class="example-icon">cloud_circle</mat-icon>
+          <span>Storage</span>
+        </button> -->
+        <button mat-list-item (click)="selectComponent('address')">
+          <mat-icon class="example-icon">home</mat-icon>
+          <span>Address</span>
+        </button>
+        <button mat-list-item (click)="selectComponent('industry')">
+          <mat-icon class="example-icon">business_center</mat-icon>
+          <span>Add Industry</span>
+        </button>
+
+      </mat-action-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div *ngIf="checkComponent('dashboard')">
+        <app-dashboard></app-dashboard>
+      </div>
+      <div *ngIf="checkComponent('users')">
+        <app-users></app-users>
+      </div>
+      <!-- <div *ngIf="Component === 'tasks'">
+        <app-tasks></app-tasks>
+      </div> -->
+      <!-- <div *ngIf="Component === 'tree'">
+        <app-tree></app-tree>
+      </div> -->
+      <div *ngIf="checkComponent('address')">
+        <app-address></app-address>
+      </div>
+      <div *ngIf="checkComponent('industry')">
+        <app-industry></app-industry>
+      </div>
+      <div *ngIf="checkComponent('industries')">
+        <app-industries></app-industries>
+      </div>
+      <div *ngIf="checkComponent('update')">
+        <app-update></app-update>
+      </div>
+      <div *ngIf="checkComponent('upind')">
+        <app-upind></app-upind>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  <mat-toolbar>© All Rights Reserved</mat-toolbar>
+</div>

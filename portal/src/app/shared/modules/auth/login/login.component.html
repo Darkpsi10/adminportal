@@ -1,0 +1,48 @@
+<div class="d-flex align-items-center justify-content-center" style="
+    min-height: 100vh;
+    background: linear-gradient(120deg, #673ab7, #ffc107);">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Login!</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="loginForm" (ngSubmit)="checkCredentials()" class="form">
+        <mat-form-field appearance="fill" class="field">
+          <mat-label>Username</mat-label>
+          <input formControlName="username" matInput placeholder="Enter your username" />
+          <mat-error *ngIf="loginForm.controls['username'].hasError('required')">
+            Username is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-divider [vertical]="true"></mat-divider>
+        <mat-form-field appearance="fill" class="field">
+          <!-- <mat-hint align="end"><a href="google.com">Forgot Password?</a></mat-hint> -->
+          <mat-label>Password</mat-label>
+          <input formControlName="password" matInput [type]="hide ? 'password' : 'text'"
+            placeholder="Enter your password" />
+          <button mat-icon-button matSuffix type="button" (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide">
+            <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
+          <mat-error *ngIf="loginForm.controls['password'].hasError('required')">
+            Password is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-card-actions>
+          <mat-checkbox formControlName="check">Remember me</mat-checkbox>
+          <mat-divider inset="true"></mat-divider>
+          <button mat-raised-button type="submit" color="primary">
+            Log In
+          </button>
+          <mat-error *ngIf="loginerr"> Invalid Credentials </mat-error>
+        </mat-card-actions>
+      </form>
+      <mat-card-actions>
+        <a href="register"> Dont have an account? </a>
+      </mat-card-actions>
+    </mat-card-content>
+    <mat-card-footer>
+      <p class="mt-4 text-body-secondary">© 2017–2023</p>
+    </mat-card-footer>
+  </mat-card>
+</div>

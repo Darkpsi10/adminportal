@@ -1,0 +1,25 @@
+STEPS:
+
+1. create folders
+2. configure index.ts
+   - establish db connection and links, ports, etc
+3. configure userModels.ts
+   - create model using sequelize.define, export it
+4. configure userController.ts
+   - establish err/success status for post (use build and save instead of create if some checking needs to be done, or just pass the whole create in an if then )
+5. configure userRoutes.ts
+   - use multer to configure image upload
+   - import registeruser from usercontroller to upload image
+   - .post() to upload data
+6. now for get methods
+   - go back to controller.ts
+   - create getUser and getUsers methods, export
+   - go to routes.ts
+   - create two .get() routes for both of them
+7. for delete methods
+   - get user details by findbypk(number(req.body.id))
+   - delete using destroy, also do fs.unlink for any files
+8. for put method
+   - get user details by findbypk(number(req.body.id))
+   - put req.query in update directly as it in the same format that sequelize accepts
+   - make sure you include the case for image updation-> update image_path, new image in folder + fs.unlink previous image

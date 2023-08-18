@@ -1,0 +1,112 @@
+<div [ngClass]="{'d-none' : isEmpty}">
+    <form [formGroup]="updateForm" novalidate (ngSubmit)="update()">
+        <mat-card class="user-card">
+            <mat-card-content>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="d-flex align-items-center justify-content-center">
+                            <img src="http://localhost:3000/{{currentUser.image_path}}"
+                                alt="Only .jpg,.jpeg and .png accepted" id="myImg" height="225px" width="225px">
+                        </div>
+                        <div class="input-group">
+                            <input type="file" accept=".jpg,.jpeg,.png" class="form-control"
+                                (change)="onFileChange($event)" required>
+                            <div class="invalid-feedback">Image is <strong>required</strong></div>
+                        </div>
+                        <br>
+                    </div>
+                    <!-- Email-->
+                    <div class="col-sm-10">
+                        <mat-form-field class="full-width">
+                            <mat-label>Email</mat-label>
+                            <input matInput placeholder="Enter your Email" formControlName="email">
+                            <mat-error *ngIf="updateForm.controls['email'].hasError('required')">
+                                Email is <strong>required</strong>
+                            </mat-error>
+                            <mat-error *ngIf="updateForm.controls['email'].hasError('pattern')">
+                                Please enter a valid <strong>email</strong>
+                            </mat-error>
+                        </mat-form-field>
+
+                        <!-- Username-->
+
+                        <mat-form-field class="full-width">
+                            <mat-label>Username</mat-label>
+                            <input matInput placeholder="Enter your Username" formControlName="username">
+                            <mat-error *ngIf="updateForm.controls['username'].hasError('required')">
+                                Username is <strong>required</strong>
+                            </mat-error>
+                            <mat-error *ngIf="updateForm.controls['username'].hasError('pattern')">
+                                Please enter a valid <strong>Username</strong>
+                            </mat-error>
+                        </mat-form-field>
+
+                        <!-- Password-->
+
+                        <mat-form-field class="full-width">
+                            <mat-label>Password</mat-label>
+                            <input matInput placeholder="Enter Password" formControlName="password"
+                                [type]="hide ? 'password' : 'text'">
+                            <button mat-icon-button matSuffix type="button" (click)="hide = !hide"
+                                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+                            </button>
+                            <mat-error *ngIf="updateForm.controls['password'].hasError('required')">
+                                Password is <strong>required</strong>
+                            </mat-error>
+                            <mat-error *ngIf="updateForm.controls['password'].hasError('pattern')">
+                                Please enter a valid <strong>Password</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <!-- Address-->
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field class="full-width">
+                            <mat-label>Address</mat-label>
+                            <textarea matInput placeholder="Address"></textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <!-- DOB & Phone -->
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field class="full-width">
+                            <mat-label>Birthday</mat-label>
+                            <input matInput placeholder="Enter you DOB">
+                        </mat-form-field>
+                    </div>
+                    <div class="col">
+                        <mat-form-field class="full-width">
+                            <mat-label>Phone</mat-label>
+                            <input matInput placeholder="Phone">
+                            <!-- <mat-error *ngIf="updateForm.controls['phone'].hasError('pattern')">
+                            Please enter a valid <strong>Phone No.</strong>
+                        </mat-error> -->
+                        </mat-form-field>
+                    </div>
+                </div>
+                <!-- Status -->
+                <div class="row">
+                    <div class="col">
+                        <label id="radio-status">
+                            <h2>Status:</h2>
+                        </label>
+                        <mat-radio-group aria-labelledby="radio-status">
+                            <mat-radio-button value="Yes">Active</mat-radio-button>
+                            <mat-radio-button value="No" color="warn">Inactive</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </div>
+            </mat-card-content>
+            <mat-card-actions align="end">
+                <div class="example-button-row">
+                    <button mat-raised-button color="primary" type="submit">Submit</button>
+                    <button mat-raised-button color="warn" type="button" (click)="clearForm()">Clear</button>
+                </div>
+            </mat-card-actions>
+        </mat-card>
+    </form>
+</div>

@@ -1,0 +1,20 @@
+.form {
+    min-width: 300px;
+    width: 100%;
+}
+
+.field{
+    width: 100%;
+}
+
+mat-card-actions{
+    justify-content: center;
+}
+
+mat-card{
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+mat-card-footer{
+    align-self: center;
+}

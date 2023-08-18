@@ -1,0 +1,178 @@
+<div [ngClass]="{'d-none' : isEmpty}">
+    <form [formGroup]="updateForm" novalidate (ngSubmit)="update()">
+        <mat-card class="industry-card">
+            <mat-card-content>
+                <!-- Name -->
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field class="full-width">
+                            <mat-label>First Name</mat-label>
+                            <input matInput placeholder="Enter your First name" formControlName="firstname">
+                            <mat-error *ngIf="updateForm.controls['firstname'].hasError('required')">
+                                First name is <strong>required</strong>
+                            </mat-error>
+                            <mat-error *ngIf="updateForm.controls['firstname'].hasError('pattern')">
+                                Please enter a valid <strong>name</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col">
+                        <mat-form-field class="full-width">
+                            <mat-label>Last Name</mat-label>
+                            <input matInput placeholder="Enter your Last name" formControlName="lastname">
+                            <mat-error *ngIf="updateForm.controls['lastname'].hasError('required')">
+                                Last name is <strong>required</strong>
+                            </mat-error>
+                            <mat-error *ngIf="updateForm.controls['lastname'].hasError('pattern')">
+                                Please enter a valid <strong>surname</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <!-- Industry Name/Type -->
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field class="full-width">
+                            <mat-label>Industry Name</mat-label>
+                            <input matInput placeholder="Enter your Industry Name" formControlName="ind_name">
+                            <mat-error *ngIf="updateForm.controls['ind_name'].hasError('required')">
+                                Industry Name is <strong>required</strong>
+                            </mat-error>
+                            <mat-error *ngIf="updateForm.controls['ind_name'].hasError('pattern')">
+                                Please enter a valid <strong>Industry Name</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col">
+                        <mat-form-field class="full-width">
+                            <mat-select placeholder="Industry type" formControlName="ind_type">
+                                <mat-option *ngFor="let type of types" [value]="type.id">
+                                    {{ type.name }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="updateForm.controls['ind_type'].hasError('required')">
+                                Industry type is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <!-- Address-->
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field class="full-width">
+                            <mat-label>Address</mat-label>
+                            <textarea matInput placeholder="Enter your Address" formControlName="address"></textarea>
+                            <mat-error *ngIf="updateForm.controls['address'].hasError('required')">
+                                Address is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field class="full-width">
+                            <mat-label>Address 2</mat-label>
+                            <textarea matInput placeholder="Address 2" formControlName="address2"></textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <!-- Email & Phone -->
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field class="full-width">
+                            <mat-label>Email</mat-label>
+                            <input matInput placeholder="Email" formControlName="email">
+                            <mat-error *ngIf="updateForm.controls['email'].hasError('required')">
+                                Email is <strong>required</strong>
+                            </mat-error>
+                            <mat-error *ngIf="updateForm.controls['email'].hasError('email')">
+                                Please Enter a <strong>Valid Email</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col">
+                        <mat-form-field class="full-width">
+                            <mat-label>Phone</mat-label>
+                            <input matInput placeholder="Phone" formControlName="phone">
+                            <mat-error *ngIf="updateForm.controls['phone'].hasError('required')">
+                                Phone No. is <strong>required</strong>
+                            </mat-error>
+                            <mat-error *ngIf="updateForm.controls['phone'].hasError('pattern')">
+                                Please enter a valid <strong>Phone No.</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <!-- Backup Email & Phone -->
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field class="full-width">
+                            <mat-label>Email 2</mat-label>
+                            <input matInput placeholder="Email 2" formControlName="email2">
+                            <mat-error *ngIf="updateForm.controls['email2'].hasError('required')">
+                                Email is <strong>required</strong>
+                            </mat-error>
+                            <mat-error *ngIf="updateForm.controls['email2'].hasError('email')">
+                                Please Enter a <strong>Valid Email</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col">
+                        <mat-form-field class="full-width">
+                            <mat-label>Phone 2</mat-label>
+                            <input matInput placeholder="Phone 2" formControlName="phone2">
+                            <mat-error *ngIf="updateForm.controls['phone2'].hasError('required')">
+                                Phone No. is <strong>required</strong>
+                            </mat-error>
+                            <mat-error *ngIf="updateForm.controls['phone2'].hasError('pattern')">
+                                Please enter a valid <strong>Phone No.</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <!-- DOB & Salary -->
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field class="full-width">
+                            <mat-label>Date of Birth</mat-label>
+                            <input matInput [matDatepicker]="dp" formControlName="DOB">
+                            <mat-hint>DD/MM/YYYY</mat-hint>
+                            <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
+                            <mat-datepicker #dp></mat-datepicker>
+                            <mat-error *ngIf="updateForm.controls['DOB'].hasError('required')">
+                                Date of Birth is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col">
+                        <mat-form-field class="full-width">
+                            <mat-label>Salary</mat-label>
+                            <input matInput placeholder="Salary" formControlName="salary">
+                            <mat-error *ngIf="updateForm.controls['salary'].hasError('pattern')">
+                                Please enter a <strong>Numeric Value</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <!-- Status -->
+                <div class="row">
+                    <div class="col">
+                        <label id="radio-status">
+                            <h2>Status:</h2>
+                        </label>
+                        <mat-radio-group aria-labelledby="radio-status" formControlName="status">
+                            <mat-radio-button [value]="true">Active</mat-radio-button>
+                            <mat-radio-button [value]="false" color="warn">Inactive</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </div>
+            </mat-card-content>
+            <mat-card-actions align="end">
+                <div class="example-button-row">
+                    <button mat-raised-button color="primary" type="submit">Submit</button>
+                    <button mat-raised-button color="warn" type="button" (click)="clearForm()">Clear</button>
+                </div>
+            </mat-card-actions>
+        </mat-card>
+    </form>
+</div>

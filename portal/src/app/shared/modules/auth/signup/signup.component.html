@@ -1,0 +1,93 @@
+<div class="d-flex align-items-center justify-content-center" style="
+    min-height: 100vh;
+    background: linear-gradient(120deg, #9c27b0, #ff9800);" #maindiv>
+    <mat-card id="form">
+        <mat-card-header>
+            <mat-card-title>Signup!</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form [formGroup]="signupForm" (ngSubmit)="signup()" novalidate [ngClass]="{'was-validated' : imgerr}">
+                <mat-divider [vertical]="true"></mat-divider>
+                <div class="d-flex align-items-center justify-content-center" [hidden]="!showImg">
+                    <img src="" alt="Only .jpg,.jpeg and .png accepted" id="myImg" height="225px" width="225px">
+                </div>
+                <br>
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="inputGroupFile">Image</label>
+                    <input type="file" accept=".jpg,.jpeg,.png" class="form-control" id="inputGroupFile"
+                        (change)="onFileChange($event)" required>
+                    <div class="invalid-feedback">Image is <strong>required</strong></div>
+                </div>
+                <mat-divider [vertical]="true"></mat-divider>
+                <mat-form-field appearance="fill" class="field">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email" placeholder="Enter your email" />
+                    <mat-error *ngIf="signupForm.controls['email'].hasError('required')">
+                        Email is <strong>required</strong>
+                    </mat-error>
+                    <mat-error *ngIf="signupForm.controls['email'].hasError('email')">
+                        Please Enter a <strong>Valid Email</strong>
+                    </mat-error>
+                </mat-form-field>
+                <mat-divider [vertical]="true"></mat-divider>
+                <mat-form-field appearance="fill" class="field" hintLabel="Max 15 characters">
+                    <mat-label>Username</mat-label>
+                    <input matInput #input maxlength="15" placeholder="Enter your username"
+                        formControlName="username" />
+                    <mat-hint align="end">{{ input.value.length }}/15</mat-hint>
+                    <mat-divider [vertical]="true"></mat-divider>
+                    <mat-error *ngIf="signupForm.controls['username'].hasError('required')">
+                        Username is <strong>required</strong>
+                    </mat-error>
+                    <mat-error *ngIf="signupForm.controls['username'].hasError('pattern')">
+                        Username must <strong>have 5 characters</strong>
+                    </mat-error>
+                </mat-form-field>
+                <mat-divider [vertical]="true"></mat-divider>
+                <mat-form-field appearance="fill" class="field"
+                    hintLabel="Atleast 8 characters, a Number and Special character">
+                    <mat-label>Password</mat-label>
+                    <input formControlName="password" maxlength="30" matInput [type]="hide ? 'password' : 'text'"
+                        placeholder="Enter your password" />
+                    <button mat-icon-button matSuffix type="button" (click)="hide = !hide"
+                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+                    </button>
+                    <mat-error *ngIf="signupForm.controls['password'].hasError('required')">
+                        Password is <strong>required</strong>
+                    </mat-error>
+                    <mat-error *ngIf="signupForm.controls['password'].hasError('pattern')">
+                        Password Must have 8 <strong>Characters</strong> a <strong>Number and Special character</strong>
+                    </mat-error>
+                </mat-form-field>
+                <p>
+
+                </p>
+                <mat-divider [vertical]="true"></mat-divider>
+                <mat-form-field appearance="fill" class="field">
+                    <mat-label>Confirm Password</mat-label>
+                    <input formControlName="confirmPassword" matInput [type]="chide ? 'password' : 'text'"
+                        placeholder="Enter your password" />
+                    <button mat-icon-button matSuffix type="button" (click)="chide = !chide"
+                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="chide">
+                        <mat-icon>{{ chide ? "visibility_off" : "visibility" }}</mat-icon>
+                    </button>
+                    <mat-error *ngIf="signupForm.controls['confirmPassword'].hasError('required')">
+                        Confirm Password is <strong>required</strong>
+                    </mat-error>
+                    <mat-error *ngIf="signupForm.value['confirmPassword'] != signupForm.value['password']">
+                        Password does not <strong>Match</strong>
+                    </mat-error>
+                </mat-form-field>
+                <mat-card-actions>
+                    <button type="submit" mat-raised-button color="primary">
+                        Register
+                    </button>
+                </mat-card-actions>
+            </form>
+        </mat-card-content>
+        <mat-card-footer>
+            <p class="mt-4 text-body-secondary">© 2017–2023</p>
+        </mat-card-footer>
+    </mat-card>
+</div>

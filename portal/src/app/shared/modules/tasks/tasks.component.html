@@ -1,0 +1,30 @@
+<div class="container">
+  <h2>To do</h2>
+
+  <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo" [cdkDropListConnectedTo]="doneList" class="list"
+    (cdkDropListDropped)="drop($event)">
+    <div class="list-item" *ngFor="let item of todo" cdkDrag>{{item}}</div>
+  </div>
+</div>
+
+<div class="container">
+  <h2>Done</h2>
+
+  <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="done" [cdkDropListConnectedTo]="todoList" class="list"
+    (cdkDropListDropped)="drop($event)">
+    <div class="list-item" *ngFor="let item of done" cdkDrag>{{item}}</div>
+  </div>
+</div>
+
+<div class="container">
+  <h2>Add Tasks</h2>
+  <mat-form-field appearance="fill" class="field">
+    <mat-label>Task</mat-label>
+    <textarea matInput [formControl]="task" placeholder="Enter new task" cdkTextareaAutosize
+      #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"></textarea>
+  </mat-form-field>
+  <mat-divider [vertical]="true"></mat-divider>
+  <button mat-raised-button type="submit" (click)="addTask()" color="primary">
+    Add
+  </button>
+</div>

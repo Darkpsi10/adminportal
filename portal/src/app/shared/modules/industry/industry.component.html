@@ -1,0 +1,194 @@
+<form [formGroup]="indForm" novalidate (ngSubmit)="saveInd()">
+    <mat-card class="industry-card">
+        <mat-card-header>
+            <mat-card-title>Industry Information</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <!-- Name -->
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="full-width">
+                        <mat-label>First Name</mat-label>
+                        <input matInput placeholder="Enter your First name" formControlName="firstname">
+                        <mat-error *ngIf="indForm.controls['firstname'].hasError('required')">
+                            First name is <strong>required</strong>
+                        </mat-error>
+                        <mat-error *ngIf="indForm.controls['firstname'].hasError('pattern')">
+                            Please enter a valid <strong>name</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field class="full-width">
+                        <mat-label>Last Name</mat-label>
+                        <input matInput placeholder="Enter your Last name" formControlName="lastname">
+                        <mat-error *ngIf="indForm.controls['lastname'].hasError('required')">
+                            Last name is <strong>required</strong>
+                        </mat-error>
+                        <mat-error *ngIf="indForm.controls['lastname'].hasError('pattern')">
+                            Please enter a valid <strong>surname</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <!-- Industry Name/Type -->
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="full-width">
+                        <mat-label>Industry Name</mat-label>
+                        <input matInput placeholder="Enter your Industry Name" formControlName="ind_name">
+                        <mat-error *ngIf="indForm.controls['ind_name'].hasError('required')">
+                            Industry Name is <strong>required</strong>
+                        </mat-error>
+                        <mat-error *ngIf="indForm.controls['ind_name'].hasError('pattern')">
+                            Please enter a valid <strong>Industry Name</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field class="full-width">
+                        <mat-select placeholder="Industry type" formControlName="ind_type">
+                            <mat-option *ngFor="let type of types" [value]="type.id">
+                                {{ type.name }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="indForm.controls['ind_type'].hasError('required')">
+                            Industry type is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <!-- Address-->
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="full-width">
+                        <mat-label>Address</mat-label>
+                        <textarea matInput placeholder="Enter your Address" formControlName="address"></textarea>
+                        <mat-error *ngIf="indForm.controls['address'].hasError('required')">
+                            Address is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row" *ngIf="!hasUnit">
+                <div class="col">
+                    <button mat-button color="primary" type="button" (click)="hasUnit = !hasUnit">
+                        + Add Another Address
+                    </button>
+                </div>
+            </div>
+            <div class="row" *ngIf="hasUnit">
+                <div class="col">
+                    <mat-form-field class="full-width">
+                        <mat-label>Address</mat-label>
+                        <textarea matInput placeholder="Address 2" formControlName="address2"></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+            <!-- Email & Phone -->
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="full-width">
+                        <mat-label>Email</mat-label>
+                        <input matInput placeholder="Email" formControlName="email">
+                        <mat-error *ngIf="indForm.controls['email'].hasError('required')">
+                            Email is <strong>required</strong>
+                        </mat-error>
+                        <mat-error *ngIf="indForm.controls['email'].hasError('email')">
+                            Please Enter a <strong>Valid Email</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field class="full-width">
+                        <mat-label>Phone</mat-label>
+                        <input matInput placeholder="Phone" formControlName="phone">
+                        <mat-error *ngIf="indForm.controls['phone'].hasError('required')">
+                            Phone No. is <strong>required</strong>
+                        </mat-error>
+                        <mat-error *ngIf="indForm.controls['phone'].hasError('pattern')">
+                            Please enter a valid <strong>Phone No.</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <!-- Backup Email & Phone -->
+            <div class="row">
+                <div class="col" *ngIf="!hasBackup">
+                    <button mat-button color="primary" type="button" (click)="hasBackup = !hasBackup">
+                        + Add Backup Contact
+                    </button>
+                </div>
+                <div class="col" *ngIf="hasBackup">
+                    <mat-form-field class="full-width">
+                        <mat-label>Email</mat-label>
+                        <input matInput placeholder="Email 2" formControlName="email2">
+                        <mat-error *ngIf="indForm.controls['email2'].hasError('required')">
+                            Email is <strong>required</strong>
+                        </mat-error>
+                        <mat-error *ngIf="indForm.controls['email2'].hasError('email')">
+                            Please Enter a <strong>Valid Email</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col" *ngIf="hasBackup">
+                    <mat-form-field class="full-width">
+                        <mat-label>Phone</mat-label>
+                        <input matInput placeholder="Phone 2" formControlName="phone2">
+                        <mat-error *ngIf="indForm.controls['phone2'].hasError('required')">
+                            Phone No. is <strong>required</strong>
+                        </mat-error>
+                        <mat-error *ngIf="indForm.controls['phone2'].hasError('pattern')">
+                            Please enter a valid <strong>Phone No.</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <!-- DOB -->
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="full-width">
+                        <mat-label>Date of Birth</mat-label>
+                        <input matInput [matDatepicker]="dp" formControlName="DOB">
+                        <mat-hint>DD/MM/YYYY</mat-hint>
+                        <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
+                        <mat-datepicker #dp></mat-datepicker>
+                        <mat-error *ngIf="indForm.controls['DOB'].hasError('required')">
+                            Date of Birth is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field class="full-width">
+                        <mat-label>Salary</mat-label>
+                        <input matInput placeholder="Salary" formControlName="salary">
+                        <mat-error *ngIf="indForm.controls['salary'].hasError('pattern')">
+                            Please enter a <strong>Numeric Value</strong>
+                        </mat-error>
+                        <mat-error *ngIf="indForm.controls['salary'].hasError('required')">
+                            Salary is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <!--Status -->
+            <div class="row">
+                <div class="col">
+                    <label id="radio-status">
+                        <h2>Status:</h2>
+                    </label>
+                    <mat-radio-group aria-labelledby="radio-status" formControlName="status">
+                        <mat-radio-button value=1>Active</mat-radio-button>
+                        <mat-radio-button value=0 color="warn">Inactive</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+            </div>
+        </mat-card-content>
+        <mat-card-actions align="end">
+            <div class="example-button-row">
+                <button mat-raised-button color="primary" type="submit">Submit</button>
+                <button mat-raised-button color="warn" type="button" (click)="clearForm()">Clear</button>
+            </div>
+        </mat-card-actions>
+    </mat-card>
+</form>
